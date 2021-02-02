@@ -11,6 +11,7 @@ function editNav() {
 // ------------- DOM Elements -------------
 // ----------------------------------------
 const modalBg = document.querySelector(".bground");
+const formData = document.querySelectorAll('.formData');
 
 const modalBtn = document.querySelectorAll(".modal-btn");
 const modalBtnClose = document.querySelectorAll('.close'); // #issue1
@@ -23,7 +24,6 @@ const formBirthdate = document.getElementById('birthdate');
 const formQuantity = document.getElementById('quantity');
 const formRadio = document.querySelectorAll('input[type=radio]')
 const formCheckbox = document.getElementById('checkbox1');
-
 
 
 // ----------------------------------------
@@ -61,62 +61,121 @@ function closeModal() {
 }
 
 /**
+ * Créer un message d'erreur ou le supprime
+ * @param {boolean} // un boulean pour indiquer s'il y a une erreur ou non
+ * @param {string} // le message d'erreur à afficher
+ * @param {Element} // Un objet Element contenant l'élément du DOM 
+ */ 
+function messageError(isError, message, id){
+  const formSpan = document.createElement('span');
+
+  if(isError){
+    formSpan.classList.add('error');
+
+    formSpan.innerHTML = message;
+
+    formSpan.style.color = '#FF4E60';
+    formSpan.style.fontSize = '10px';
+
+    if(id.type == 'text' || id.type == 'email' || id.type == 'date' || id.type == 'number'){
+      id.style.border = "solid 2px #FF4E60";
+    }
+
+    if(id.parentElement.lastChild.className == 'error'){
+      id.parentElement.removeChild(id.parentElement.lastChild);
+    }
+    id.parentElement.appendChild(formSpan);
+  }
+  else{
+    if(id.parentElement.lastChild.className == 'error'){
+      id.parentElement.removeChild(id.parentElement.lastChild);
+
+      if(id.type == 'text' || id.type == 'email' || id.type == 'date' || id.type == 'number'){
+        id.style.border = "none";
+      }   
+    }
+  }
+}
+
+/**
  * Valide le formulaire
  * @returns {boolean}
  */ 
 function validate(){
   let firstname = false;
-  let lastname = false;
   let email = false;
   let birthdate = false;
   let quantity = false;
   let radio = false;
   let checkbox = false;
 
-  // On test la valeur du prénom
+  // On test la valeur du prénom 
   if(formFirstname.value.trim().length >= 2){
-    console.log('true pour le prenom ' + formFirstname.value);
+    messageError(false, "Veuillez entrer 2 caractères ou plus pour le champ du nom", formFirstname);
     firstname = true;
   }
+  else{
+    messageError(true, "Veuillez entrer 2 caractères ou plus pour le champ du nom", formFirstname);
+  }
 
-  // On test la valeur du nom
+  // On test la valeur du nom 
   if(formLastname.value.trim().length >= 2){
-    console.log('true pour le nom ' + formLastname.value);
+    messageError(false, "Veuillez entrer 2 caractères ou plus pour le champ du nom", formLastname);
     lastname = true;
+  }
+  else{
+    messageError(true, "Veuillez entrer 2 caractères ou plus pour le champ du nom", formLastname);
   }
  
   // On test la valeur de l'email
   if(emailRegEx.test(formEmail.value)){
-    console.log('true pour l\'email ' + formEmail.value);
+    messageError(false, "Vous devez entrer un email valide", formEmail);
     email = true;
+  }
+  else{
+    messageError(true, "Vous devez entrer un email valide", formEmail);
   }
 
   // On test la valeur de la date de naissance
   if(birthdateRegEx.test(formBirthdate.value)){
-    console.log('true pour la date de naissance ' + formBirthdate.value);
+    messageError(false, "Vous devez entrer votre date de naissance", formBirthdate);
     birthdate = true;
+  }
+  else{
+    messageError(true, "Vous devez entrer votre date de naissance", formBirthdate);
   }
 
   // on test la valeur du nombre de tournois
   if(!isNaN(formQuantity.value) && formQuantity.value.trim() != ""){
-    console.log('true pour le nombre de tournois ' + formQuantity.value);
+    messageError(false, "Vous devez entrer un nombre", formQuantity);
     quantity = true;
+  }
+  else{
+    messageError(true, "Vous devez entrer un nombre", formQuantity);
   }
 
   // On regarde les inputs pour savoir s'il y en a un de checked
   for(let i=0; i<formRadio.length;i++){
     if(formRadio[i].checked){
-      console.log('La ville est ' + formRadio[i].value);
+      messageError(false, "Vous devez shoisir une ville", formRadio[i]);
       radio = true;
+      break;
+    }
+    else{
+      messageError(true, "Vous devez shoisir une ville", formRadio[i]);
     }
   }
 
   // On regarde si la checkbox est checked
   if(formCheckbox.checked){
-    console.log('true pour la checkbox');
+    messageError(false, "Vous devez accepté les conditions d'utilisation", formCheckbox);
     checkbox = true;
   }
+  else{
+    messageError(true, "Vous devez accepté les conditions d'utilisation", formCheckbox);
+  }
 
+  // Si toute les conditions sont true, on valide le formulaire
   if(firstname && lastname && email && birthdate && quantity && radio && checkbox){
     return true
   }
@@ -124,3 +183,5 @@ function validate(){
     return false;
   }
 }
+
+

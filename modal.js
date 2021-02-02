@@ -63,6 +63,7 @@ function closeModal() {
 /**
  * Créer un message d'erreur ou le supprime
  * @param {boolean} // un boulean pour indiquer s'il y a une erreur ou non
+ * @param {number} // un indice concernant l'order dans le tableau
  * @param {string} // le message d'erreur à afficher
  * @param {Element} // Un objet Element contenant l'élément du DOM 
  */ 
@@ -97,12 +98,14 @@ function messageError(isError, message, id){
   }
 }
 
+
 /**
  * Valide le formulaire
  * @returns {boolean}
  */ 
 function validate(){
   let firstname = false;
+  let lastname = false;
   let email = false;
   let birthdate = false;
   let quantity = false;
@@ -175,7 +178,7 @@ function validate(){
     messageError(true, "Vous devez accepté les conditions d'utilisation", formCheckbox);
   }
 
-  // Si toute les conditions sont true, on valide le formulaire
+
   if(firstname && lastname && email && birthdate && quantity && radio && checkbox){
     return true
   }
@@ -183,5 +186,3 @@ function validate(){
     return false;
   }
 }
-
-

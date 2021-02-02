@@ -13,6 +13,11 @@ function editNav() {
 const modalBg = document.querySelector(".bground");
 const formData = document.querySelectorAll('.formData');
 
+const form = document.getElementById('form');
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+});
+
 const modalBtn = document.querySelectorAll(".modal-btn");
 const modalBtnClose = document.querySelectorAll('.close'); // #issue1
 
@@ -101,7 +106,6 @@ function messageError(isError, message, id){
 
 /**
  * Valide le formulaire
- * @returns {boolean}
  */ 
 function validate(){
   let firstname = false;
@@ -178,11 +182,25 @@ function validate(){
     messageError(true, "Vous devez accepté les conditions d'utilisation", formCheckbox);
   }
 
-
+  // on valide le formulaire et charge le remerciement
   if(firstname && lastname && email && birthdate && quantity && radio && checkbox){
-    return true
-  }
-  else{
-    return false;
+    const modalBody = document.getElementsByClassName('modal-body');
+    const bouton  = document.createElement('div');
+    modalBody[0].innerHTML = '<h2>Thank you for submitting your registration details</h2>';
+    modalBody[0].style.minHeight = '850px';
+    modalBody[0].style.textAlign = 'center';
+    modalBody[0].style.display = 'flex';
+    modalBody[0].style.flexDirection = 'column';
+    modalBody[0].style.justifyContent = "center";
+
+
+    bouton.innerHTML = "Fermer la fenêtre";
+    bouton.classList.add('btn-submit');
+    bouton.style.position = 'absolute';
+    bouton.style.bottom = '25px';
+    modalBody[0].appendChild(bouton);
+
+    bouton.addEventListener("click", closeModal);
+    
   }
 }

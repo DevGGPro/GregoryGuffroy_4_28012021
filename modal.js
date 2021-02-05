@@ -68,7 +68,6 @@ function closeModal() {
 /**
  * Créer un message d'erreur ou le supprime
  * @param {boolean} // un boulean pour indiquer s'il y a une erreur ou non
- * @param {number} // un indice concernant l'order dans le tableau
  * @param {string} // le message d'erreur à afficher
  * @param {Element} // Un objet Element contenant l'élément du DOM 
  */ 
@@ -82,6 +81,8 @@ function messageError(isError, message, id){
 
     formSpan.style.color = '#FF4E60';
     formSpan.style.fontSize = '10px';
+
+    id.style.marginBottom = '0px';
 
     if(id.type == 'text' || id.type == 'email' || id.type == 'date' || id.type == 'number'){
       id.style.border = "solid 2px #FF4E60";
@@ -98,10 +99,12 @@ function messageError(isError, message, id){
 
       if(id.type == 'text' || id.type == 'email' || id.type == 'date' || id.type == 'number'){
         id.style.border = "none";
+        id.style.marginBottom = '10px';
       }   
     }
   }
 }
+
 
 
 /**
@@ -115,71 +118,71 @@ function validate(){
   let quantity = false;
   let radio = false;
   let checkbox = false;
-
+ 
   // On test la valeur du prénom 
   if(formFirstname.value.trim().length >= 2){
-    messageError(false, "Veuillez entrer 2 caractères ou plus pour le champ du nom", formFirstname);
+    messageError(false, "Please enter 2 or more characters for the firstname field", formFirstname);
     firstname = true;
   }
   else{
-    messageError(true, "Veuillez entrer 2 caractères ou plus pour le champ du nom", formFirstname);
+    messageError(true, "Please enter 2 or more characters for the firstname field", formFirstname);
   }
 
   // On test la valeur du nom 
   if(formLastname.value.trim().length >= 2){
-    messageError(false, "Veuillez entrer 2 caractères ou plus pour le champ du nom", formLastname);
+    messageError(false, "Please enter 2 or more characters for the lastname field", formLastname);
     lastname = true;
   }
   else{
-    messageError(true, "Veuillez entrer 2 caractères ou plus pour le champ du nom", formLastname);
+    messageError(true, "Please enter 2 or more characters for the lastname field", formLastname);
   }
  
   // On test la valeur de l'email
   if(emailRegEx.test(formEmail.value)){
-    messageError(false, "Vous devez entrer un email valide", formEmail);
+    messageError(false, "You must enter a valid email", formEmail);
     email = true;
   }
   else{
-    messageError(true, "Vous devez entrer un email valide", formEmail);
+    messageError(true, "You must enter a valid email", formEmail);
   }
 
   // On test la valeur de la date de naissance
   if(birthdateRegEx.test(formBirthdate.value)){
-    messageError(false, "Vous devez entrer votre date de naissance", formBirthdate);
+    messageError(false, "You must enter your birthdate", formBirthdate);
     birthdate = true;
   }
   else{
-    messageError(true, "Vous devez entrer votre date de naissance", formBirthdate);
+    messageError(true, "You must enter your birthdate", formBirthdate);
   }
 
   // on test la valeur du nombre de tournois
   if(!isNaN(formQuantity.value) && formQuantity.value.trim() != ""){
-    messageError(false, "Vous devez entrer un nombre", formQuantity);
+    messageError(false, "You must enter a number", formQuantity);
     quantity = true;
   }
   else{
-    messageError(true, "Vous devez entrer un nombre", formQuantity);
+    messageError(true, "You must enter a number", formQuantity);
   }
 
   // On regarde les inputs pour savoir s'il y en a un de checked
   for(let i=0; i<formRadio.length;i++){
     if(formRadio[i].checked){
-      messageError(false, "Vous devez shoisir une ville", formRadio[i]);
+      messageError(false, "You must choose a city", formRadio[i]);
       radio = true;
       break;
     }
     else{
-      messageError(true, "Vous devez shoisir une ville", formRadio[i]);
+      messageError(true, "You must choose a city", formRadio[i]);
     }
   }
 
   // On regarde si la checkbox est checked
   if(formCheckbox.checked){
-    messageError(false, "Vous devez accepté les conditions d'utilisation", formCheckbox);
+    messageError(false, "You must accept the terms of use", formCheckbox);
     checkbox = true;
   }
   else{
-    messageError(true, "Vous devez accepté les conditions d'utilisation", formCheckbox);
+    messageError(true, "You must accept the terms of use", formCheckbox);
   }
 
   // on valide le formulaire et charge le remerciement
@@ -192,10 +195,12 @@ function validate(){
     modalBody[0].style.display = 'flex';
     modalBody[0].style.flexDirection = 'column';
     modalBody[0].style.justifyContent = "center";
+    modalBody[0].style.alignItems = "center";
 
 
-    bouton.innerHTML = "Fermer la fenêtre";
+    bouton.innerHTML = "Close";
     bouton.classList.add('btn-submit');
+    bouton.classList.add('button');
     bouton.style.position = 'absolute';
     bouton.style.bottom = '25px';
     modalBody[0].appendChild(bouton);

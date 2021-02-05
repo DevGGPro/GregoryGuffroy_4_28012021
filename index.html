@@ -6,13 +6,14 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link href="https://fonts.googleapis.com/css?family=DM+Sans" rel="stylesheet" />
 		<link rel="stylesheet" href="modal.css" />
+		<link rel="shortcut icon" type="image/png" href="favicon.ico" />
 		<title>Reservation</title>
 	</head>
 	<body>
 		<!-- Le header -->
 		<header class="topnav" id="myTopnav">
 			<div class="header-logo">
-				<img alt="logo" src="Logo.png" width="auto" height="auto" />
+				<img alt="logo" src="Logo.png" />
 			</div>
 			<nav class="main-navbar">
 				<a href="#" class="active">Event detail</a>
@@ -28,9 +29,9 @@
 		<section class="hero-section">
 			<!-- Le contenu de la section -->
 			<div class="hero-content">
-				<h1 class="hero-headline">Marathon national de jeux vidéos</h1>
-				<p class="hero-text">Vous aimez jouer ? Notre prochain évènement gaming est ouvert aux réservations... Places limitées !</p>
-				<button class="btn-signup modal-btn">je m'inscris</button>
+				<h1 class="hero-headline">US Nationwide <span>Game-a-Thon</span></h1>
+				<p class="hero-text">Do you live to game? Our next gaming event is now accepting reservations for players, but spots are limited</p>
+				<button class="btn-signup modal-btn">Sign Up Now</button>
 			</div>
 
 			<!-- L'image en background de la section -->
@@ -50,13 +51,13 @@
 						
 						<!-- Firstname -->
 						<div class="formData">
-							<label for="first">Prénom</label><br>
-							<input class="text-control" type="text" id="first" name="first" autofocus/> <br>
+							<label for="first">Firstname</label><br>
+							<input class="text-control" type="text" id="first" name="first" /> <br>
 						</div>
 
 						<!-- Lastname -->
 						<div class="formData">
-							<label for="last">Nom</label><br>
+							<label for="last">Lastname</label><br>
 							<input class="text-control" type="text" id="last" name="last" /> <br>
 						</div>
 
@@ -68,18 +69,18 @@
 
 						<!-- Birthdate -->
 						<div class="formData">
-							<label for="birthdate">Date de naissance</label><br>
-							<input class="text-control" type="date" id="birthdate" name="birthdate" placeholder="JJ/MM/AAAA"/> <br>
+							<label for="birthdate">Birthdate</label><br>
+							<input class="text-control" type="date" id="birthdate" name="birthdate" /> <br>
 						</div>
 
 						<!-- Question -->
 						<div class="formData">
-							<label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label> <br>
+							<label for="quantity">How many tournaments have you ateended?</label> <br>
 							<input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99" >
 						</div>
 
 						<!-- La partie contenant les inputs de type radio -->
-						<p class="text-label">Quelles villes ?</p>
+						<p class="text-label">Which location?</p>
 						<div class="formData">
 
 							<!-- New York -->
@@ -112,17 +113,17 @@
 						<div class="formData">
 
 							<input class="checkbox-input" type="checkbox" id="checkbox1" checked />
-							<label class="checkbox2-label" for="checkbox1" required> <span class="checkbox-icon"></span>J'ai lu et accepté les conditions d'utilisation.</label>
+							<label class="checkbox2-label" for="checkbox1"> <span class="checkbox-icon"></span>I have read and accept the General Conditions</label>
 							<br>
 
 							<input class="checkbox-input" type="checkbox" id="checkbox2" />
-							<label class="checkbox2-label" for="checkbox2"><span class="checkbox-icon"></span>Je souhaite être prévenu des prochains évènements.</label>
+							<label class="checkbox2-label" for="checkbox2"><span class="checkbox-icon"></span>I wish to be notified of the next event</label>
 							<br>
 
 						</div>
 
 						<!-- Le bouton d'envoie du formulaire -->
-						<input class="btn-submit" type="submit" class="button" value="C'est parti" />
+						<input class="btn-submit button" type="submit" value="Go" />
 					</form>
 				</div>
 			</div>
